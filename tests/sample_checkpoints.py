@@ -1,7 +1,12 @@
-"""Samples completions from trained BDH checkpoints across test prompts."""
-
 import os
+import sys
+from pathlib import Path
 import torch
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
 from train_bdh_tinyshakespeare import BDH, BDHConfig
 
 
@@ -33,5 +38,5 @@ if __name__ == "__main__":
         "KING RICHARD:\nGive me another horse: ",
     ]
 
-    test_checkpoint("bdh_d64.pt", prompts)
-    test_checkpoint("bdh_d128.pt", prompts)
+    test_checkpoint(str(ROOT_DIR / "bdh_d64.pt"), prompts)
+    test_checkpoint(str(ROOT_DIR / "bdh_d128.pt"), prompts)

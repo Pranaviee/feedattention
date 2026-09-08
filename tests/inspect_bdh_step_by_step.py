@@ -1,9 +1,14 @@
-"""Inspects intermediate tensor states, sparsity, and Hebbian memory across BDH layers."""
-
 import os
+import sys
 import argparse
+from pathlib import Path
 import torch
 import torch.nn.functional as F
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
 from train_bdh_tinyshakespeare import BDH, BDHConfig
 
 
@@ -21,14 +26,18 @@ def inspect_inference(prompt: str = "paris", checkpoint: str = "bdh_d64.pt", int
     device = torch.device("cpu")
     print(f"Inspecting BDH model on prompt: {repr(prompt)}")
 
-    if os.path.exists(checkpoint):
-        chk = torch.load(checkpoint, map_location=device, weights_only=False)
+    resolved_ckpt = checkpoint
+    if not os.path.exists(resolved_ckpt) and (ROOT_DIR / checkpoint).exists():
+        resolved_ckpt = str(ROOT_DIR / checkpoint)
+
+    if os.path.exists(resolved_ckpt):
+        chk = torch.load(resolved_ckpt, map_location=device, weights_only=False)
         config = chk["config"]
         model = BDH(config).to(device)
         model.load_state_dict(chk["model_state"])
-        print(f"Loaded checkpoint '{checkpoint}' (d={config.n_embd}, layers={config.n_layer}, heads={config.n_head})")
+        print(f"Loaded checkpoint '{resolved_ckpt}' (d={config.n_embd}, layers={config.n_layer}, heads={config.n_head})")
     else:
-        print(f"Checkpoint '{checkpoint}' not found, initializing fresh model.")
+        print(f"Checkpoint '{resolved_ckpt}' not found, initializing fresh model.")
         config = BDHConfig(n_layer=4, n_embd=64, n_head=4, mlp_internal_dim_multiplier=64)
         model = BDH(config).to(device)
     model.eval()

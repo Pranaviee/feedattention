@@ -1,10 +1,14 @@
-"""Evaluates memory recall and L2 error across context lengths on trained BDH checkpoints."""
-
 import os
+import sys
 import math
+from pathlib import Path
 import numpy as np
 import torch
 import matplotlib.pyplot as plt
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from train_bdh_tinyshakespeare import BDH, BDHConfig
 
@@ -189,8 +193,11 @@ def plot_checkpoint_results(results, output_path="checkpoint_correlation_recall_
 
 
 if __name__ == "__main__":
-    model, device = get_checkpoint_model("bdh_d128.pt")
-    corpus = load_corpus("input.txt")
+    ckpt_path = str(ROOT_DIR / "bdh_d128.pt")
+    corpus_path = str(ROOT_DIR / "input.txt")
+    output_png = str(ROOT_DIR / "results" / "checkpoint_correlation_recall_collapse.png")
+
+    model, device = get_checkpoint_model(ckpt_path)
+    corpus = load_corpus(corpus_path)
     results = evaluate_checkpoint_memory(model, device, corpus, trials_per_t=12)
-    output_png = "checkpoint_correlation_recall_collapse.png"
     plot_checkpoint_results(results, output_path=output_png)

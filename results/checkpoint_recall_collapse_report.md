@@ -66,6 +66,6 @@ Metrics evaluated across 15 sequence lengths $t \in [10, 300]$ under three contr
 
 ## 4. Associated Artifacts
 
-* **CSV Spreadsheet**: [`checkpoint_recall_collapse_data.csv`](file:///Users/pranavi/Desktop/projects/dataforge/checkpoint_recall_collapse_data.csv)
-* **High-Resolution Figure**: [`checkpoint_correlation_recall_collapse.png`](file:///Users/pranavi/Desktop/projects/dataforge/checkpoint_correlation_recall_collapse.png)
-* **Execution Script**: [`eval_checkpoint_correlation_graph.py`](file:///Users/pranavi/Desktop/projects/dataforge/eval_checkpoint_correlation_graph.py)
+* **CSV Spreadsheet**: [`checkpoint_recall_collapse_data.csv`](checkpoint_recall_collapse_data.csv)
+* **High-Resolution Figure**: [`checkpoint_correlation_recall_collapse.png`](checkpoint_correlation_recall_collapse.png)
+* **Execution Script**: [`eval_checkpoint_correlation_graph.py`](../tests/eval_checkpoint_correlation_graph.py)

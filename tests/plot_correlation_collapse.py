@@ -1,10 +1,12 @@
-"""Simulates and plots recall accuracy and L2 error across context lengths and correlation levels."""
-
 import math
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
 np.seterr(all='ignore')
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+DEFAULT_OUTPUT = str(ROOT_DIR / "results" / "key_correlation_recall_collapse.png")
 
 CONTEXT_LENGTHS = [10, 31, 51, 72, 93, 114, 134, 155, 176, 196, 217, 238, 259, 279, 300]
 
@@ -88,7 +90,7 @@ def run_simulation(n: int = 128, d: int = 32, D: int = 1000, trials: int = 60):
     return results
 
 
-def plot_recall_collapse(data=None, output_path="key_correlation_recall_collapse.png"):
+def plot_recall_collapse(data=None, output_path=DEFAULT_OUTPUT):
     if data is None:
         data = REFERENCE_DATA
 
@@ -175,4 +177,4 @@ def plot_recall_collapse(data=None, output_path="key_correlation_recall_collapse
 
 
 if __name__ == "__main__":
-    plot_recall_collapse(data=REFERENCE_DATA, output_path="key_correlation_recall_collapse.png")
+    plot_recall_collapse(data=REFERENCE_DATA, output_path=DEFAULT_OUTPUT)

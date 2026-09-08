@@ -50,7 +50,7 @@ for t in range(T):
     rho += np.outer(k[t], v[t])  # Hebbian Write
 ```
 
-In [`verify_hebbian_equivalence.py`](verify_hebbian_equivalence.py), we verify that the numerical difference between parallel causal attention and the sequential Hebbian loop is:
+In [`tests/verify_hebbian_equivalence.py`](tests/verify_hebbian_equivalence.py), we verify that the numerical difference between parallel causal attention and the sequential Hebbian loop is:
 
 $$\max |Y_{\text{parallel}} - Y_{\text{Hebbian}}| < 10^{-15}$$
 
@@ -84,12 +84,12 @@ When keys are independent ($C = 0$), cross-talk terms have zero mean and near-or
 Verify that parallel causal attention matches sequential Hebbian updates:
 
 ```bash
-python3 verify_hebbian_equivalence.py
+python3 tests/verify_hebbian_equivalence.py
 ```
 
 Output:
 ```text
-Max difference between parallel BDH attention and sequential Hebbian loop: 1.11e-16
+Max difference between parallel BDH attention and sequential Hebbian loop: 9.71e-17
 Exact match: BDH unnormalized causal attention is mathematically identical to Hebbian synaptic plasticity.
 ```
 
@@ -99,9 +99,9 @@ Exact match: BDH unnormalized causal attention is mathematically identical to He
 
 Evaluated directly on the trained checkpoint `bdh_d128.pt` ($n=2048$ per head, $d=128$):
 
-![Recall Collapse](checkpoint_correlation_recall_collapse.png)
+![Recall Collapse](results/checkpoint_correlation_recall_collapse.png)
 
-Full numerical tables and architectural descriptions are provided in [`checkpoint_recall_collapse_data.csv`](checkpoint_recall_collapse_data.csv) and [`checkpoint_recall_collapse_report.md`](checkpoint_recall_collapse_report.md).
+Full numerical tables and architectural descriptions are provided in [`results/checkpoint_recall_collapse_data.csv`](results/checkpoint_recall_collapse_data.csv) and [`results/checkpoint_recall_collapse_report.md`](results/checkpoint_recall_collapse_report.md).
 
 ---
 
@@ -109,18 +109,25 @@ Full numerical tables and architectural descriptions are provided in [`checkpoin
 
 ```text
 ├── README.md                              # Project documentation
-├── verify_hebbian_equivalence.py          # Parallel attention vs Hebbian equivalence check
 ├── train_bdh_tinyshakespeare.py           # BDH training pipeline (Apple Silicon MPS / CUDA / CPU)
-├── eval_checkpoint_correlation_graph.py   # Empirical checkpoint recall & L2 error benchmark
-├── plot_correlation_collapse.py           # Theoretical simulation of Claim 8 recall collapse
 ├── inference.py                           # CLI interactive text generation engine
-├── inspect_bdh_step_by_step.py            # Layer-by-layer tensor inspector
-├── checkpoint_correlation_recall_collapse.png # Empirical benchmark plot
-├── checkpoint_recall_collapse_data.csv    # Raw benchmark CSV data
-├── checkpoint_recall_collapse_report.md   # Architectural report and evaluation table
 ├── input.txt                              # TinyShakespeare dataset (~1.1 MB)
 ├── bdh_d64.pt                             # Checkpoint for BDH d=64 model
 ├── bdh_d128.pt                            # Checkpoint for BDH d=128 model
+├── results/                               # Benchmark figures, datasets, and reports
+│   ├── checkpoint_correlation_recall_collapse.png # Empirical checkpoint benchmark plot
+│   ├── key_correlation_recall_collapse.png        # Theoretical Claim 8 simulation plot
+│   ├── checkpoint_recall_collapse_data.csv        # Raw benchmark CSV data across t and C
+│   └── checkpoint_recall_collapse_report.md       # Comprehensive evaluation and architecture report
+├── tests/                                 # Testing and evaluation scripts
+│   ├── eval_checkpoint_correlation_graph.py       # Empirical checkpoint recall & L2 error benchmark
+│   ├── plot_correlation_collapse.py               # Theoretical simulation of Claim 8 recall collapse
+│   ├── inspect_bdh_step_by_step.py                # Layer-by-layer tensor inspector
+│   ├── verify_hebbian_equivalence.py              # Parallel attention vs Hebbian equivalence check
+│   └── sample_checkpoints.py                      # Completion tests across checkpoints
+├── visualizer/                            # Interactive web visualizer
+│   ├── app.py                             # Flask server
+│   └── static/                            # Web UI (HTML, CSS, JS)
 └── bdh_ref/                               # Upstream reference implementation (Pathway BDH)
 ```
 
@@ -145,8 +152,10 @@ python3 train_bdh_tinyshakespeare.py --d 128 --iters 800
 Evaluate retrieval accuracy and normalized $L_2$ error across context lengths $t \in [10, 300]$:
 
 ```bash
-python3 eval_checkpoint_correlation_graph.py
+python3 tests/eval_checkpoint_correlation_graph.py
 ```
+
+Outputs will be saved directly into the [`results/`](results/) folder.
 
 ### 3. Text Generation & Prompt Inspection
 
@@ -157,7 +166,7 @@ Run text generation or step-by-step tensor inspection:
 python3 inference.py --prompt "To be or not to " --model bdh_d128.pt
 
 # Interactive inspection
-python3 inspect_bdh_step_by_step.py --prompt "paris" --checkpoint bdh_d64.pt
+python3 tests/inspect_bdh_step_by_step.py --prompt "paris" --checkpoint bdh_d64.pt
 ```
 
 ---
