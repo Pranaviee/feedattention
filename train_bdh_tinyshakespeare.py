@@ -1,10 +1,4 @@
-"""
-Train a Baby Dragon Hatchling (BDH) model on TinyShakespeare.
-Optimized for Apple Silicon / Mac laptops.
-
-Supports custom embedding dimension d (e.g. d=64, d=128).
-Auto-downloads TinyShakespeare (input.txt, ~1.1MB) if not present.
-"""
+"""Trains a Baby Dragon Hatchling (BDH) model on TinyShakespeare."""
 
 import os
 import math

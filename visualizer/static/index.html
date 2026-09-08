@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDH Explainer: Interactive Synaptic Working Memory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header Navbar -->
+  <header class="navbar">
+    <div class="brand-group">
+      <div class="logo-badge">
+        <span class="dragon-icon">🐲</span>
+      </div>
+      <div>
+        <h1 class="brand-title">BDH EXPLAINER</h1>
+        <p class="brand-subtitle">Visualizing Synaptic Plasticity & Working Memory</p>
+      </div>
+    </div>
+
+    <!-- Mode Switcher Tabs -->
+    <div class="mode-switcher-group">
+      <button class="mode-tab-btn active" id="btn-mode-micro">
+        🔬 Micro Matrix Mode (n×d Synaptic Plasticity)
+      </button>
+      <button class="mode-tab-btn" id="btn-mode-llm">
+        🐲 Full BDH LLM (d=64 / d=128 Checkpoint)
+      </button>
+    </div>
+
+    <div class="header-controls">
+      <div class="control-pill" id="model-select-pill">
+        <label for="model-select">Model:</label>
+        <select id="model-select">
+          <option value="bdh_d64">BDH (d=64, 4 layers)</option>
+          <option value="bdh_d128">BDH (d=128, 4 layers)</option>
+        </select>
+      </div>
+
+      <div class="control-pill" id="temp-slider-pill">
+        <label for="temp-slider">Temp: <span id="temp-val">0.75</span></label>
+        <input type="range" id="temp-slider" min="0.1" max="1.5" step="0.05" value="0.75">
+      </div>
+
+      <a href="https://github.com/pathwaycom/bdh" target="_blank" class="github-link">
+        <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        Pathway BDH
+      </a>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       VIEW 1: MICRO MATRIX VISUALIZER (Exact n×d Dimensions, Not Large Model)
+       ========================================================================= -->
+  <section id="micro-view-section" class="micro-section active">
+    <!-- Sub-header & Preset Buttons -->
+    <div class="micro-header-bar">
+      <div class="scenario-selector">
+        <span class="micro-label">Scenario:</span>
+        <button class="scenario-btn active" id="btn-scen-beat3">
+          📖 Associative Memory: France → Paris (n=8 neurons × d=3 values)
+        </button>
+        <button class="scenario-btn" id="btn-scen-bdh">
+          ⚡ BDH Attention Step (n=3 neurons × d=2 features, T=3)
+        </button>
+      </div>
+
+      <div class="micro-controls-bar" id="micro-action-controls">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+
+    <!-- Micro Explanation Banner -->
+    <div class="micro-banner">
+      <span class="banner-badge">PROOF: MEMORY IS A MATRIX, NOT A SCALAR</span>
+      <p id="micro-banner-text">
+        Every token writes a 2D outer product <code>k ⊗ vᵀ</code> into a fixed <code>n × d</code> table (ρ). The table never changes shape!
+      </p>
+    </div>
+
+    <!-- Matrix Canvas (4 Panels side-by-side) -->
+    <div class="micro-canvas-grid">
+      
+      <!-- Panel 1: Key & Value Vectors -->
+      <div class="micro-panel" id="panel-kv">
+        <div class="panel-top">
+          <span class="step-badge">A</span>
+          <h4>Active Vectors</h4>
+          <span class="dim-pill" id="pill-kv-dims">k ∈ ℝ⁸, v ∈ ℝ³</span>
+        </div>
+        <p class="panel-desc">Neuron firing detector pattern (k) and value vector (v).</p>
+        
+        <div class="vector-display-block">
+          <span class="vec-label">Key Vector <strong>k</strong> (Neuron Activations):</span>
+          <div class="k-vector-grid" id="micro-k-vec"></div>
+        </div>
+
+        <div class="vector-display-block">
+          <span class="vec-label">Value Vector <strong>v</strong> (Dimension Features):</span>
+          <div class="v-vector-row" id="micro-v-vec"></div>
+        </div>
+      </div>
+
+      <!-- Panel 2: The Outer Product Matrix -->
+      <div class="micro-panel" id="panel-outer">
+        <div class="panel-top">
+          <span class="step-badge">B</span>
+          <h4>Hebbian Write: Outer Product</h4>
+          <span class="dim-pill" id="pill-outer-dims">Δρ = k ⊗ vᵀ ∈ ℝ⁸ˣ³</span>
+        </div>
+        <p class="panel-desc">
+          <code>Δρ[i, j] = k[i] × v[j]</code>. A 2D matrix added into memory.
+        </p>
+        <div class="matrix-table-wrap" id="micro-outer-matrix"></div>
+      </div>
+
+      <!-- Panel 3: The Synaptic Memory Table (rho) -->
+      <div class="micro-panel featured-panel" id="panel-rho">
+        <div class="panel-top">
+          <span class="step-badge">C</span>
+          <h4>Synaptic Memory Table (ρ)</h4>
+          <span class="dim-pill" id="pill-rho-dims">ρ ∈ ℝ⁸ˣ³ (Fixed Size!)</span>
+        </div>
+        <p class="panel-desc">
+          Accumulates additively: <code>ρ ⟵ ρ + k ⊗ vᵀ</code>. Never grows in size.
+        </p>
+        <div class="matrix-table-wrap" id="micro-rho-matrix"></div>
+      </div>
+
+      <!-- Panel 4: The Associative Read -->
+      <div class="micro-panel" id="panel-read">
+        <div class="panel-top">
+          <span class="step-badge">D</span>
+          <h4>Associative Read</h4>
+          <span class="dim-pill" id="pill-read-dims">v̂ = qᵀ · ρ ∈ ℝ³</span>
+        </div>
+        <p class="panel-desc">
+          Recall is a mixture of all stored items weighted by cue overlap:
+        </p>
+        
+        <div class="readout-calculations" id="micro-readout-math"></div>
+
+        <div class="winner-box" id="micro-winner-box"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 2: FULL BDH LLM CHECKPOINT VISUALIZER (paris, TinyShakespeare)
+       ========================================================================= -->
+  <div id="llm-view-container" class="llm-view-container">
+  <!-- Interactive Prompt Ribbon -->
+  <section class="prompt-bar">
+    <div class="prompt-input-container">
+      <span class="prompt-label">Prompt:</span>
+      <input type="text" id="prompt-input" value="paris" placeholder="Type any word or text..." autocomplete="off">
+      <button id="trace-btn" class="primary-btn">
+        <span class="btn-icon">⚡</span> Trace Layers
+      </button>
+      <button id="step-btn" class="secondary-btn">
+        <span class="btn-icon">👉</span> Step +1 Token
+      </button>
+      <button id="generate-btn" class="accent-btn">
+        <span class="btn-icon">✨</span> Generate 50 Tokens
+      </button>
+    </div>
+
+    <div class="presets-row">
+      <span class="presets-label">Examples:</span>
+      <button class="preset-chip active" data-text="paris">"paris"</button>
+      <button class="preset-chip" data-text="ROMEO: ">"ROMEO: "</button>
+      <button class="preset-chip" data-text="KING: ">"KING: "</button>
+      <button class="preset-chip" data-text="Before we proceed">"Before we proceed"</button>
+      <button class="preset-chip" data-text="The world is">"The world is"</button>
+    </div>
+  </section>
+
+  <!-- Layer Navigation Tabs -->
+  <div class="layer-nav-bar">
+    <div class="layer-tabs" id="layer-tabs">
+      <button class="layer-tab active" data-layer="0">Layer 0 (Synaptic Plasticity)</button>
+      <button class="layer-tab" data-layer="1">Layer 1</button>
+      <button class="layer-tab" data-layer="2">Layer 2</button>
+      <button class="layer-tab" data-layer="3">Layer 3 (Output Context)</button>
+    </div>
+    <div class="layer-meta-tags" id="layer-meta-tags">
+      <span class="badge badge-purple" id="layer-sparsity-badge">Sparsity: 71.5%</span>
+      <span class="badge badge-blue" id="layer-delta-badge">Δ Norm: 10.72</span>
+      <span class="badge badge-teal" id="layer-cossim-badge">Cos Sim: 0.820</span>
+    </div>
+  </div>
+
+  <!-- Main Architecture Visualizer Canvas -->
+  <main class="architecture-canvas">
+
+    <!-- BLOCK 1: INPUT TOKENS & EMBEDDINGS -->
+    <div class="arch-card" id="card-tokens">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-step-num">1</span>
+          <h3>Input Tokens & Embedding</h3>
+        </div>
+        <span class="dim-tag">x ∈ ℝ<sup>(T × 64)</sup></span>
+      </div>
+      <p class="card-desc">Byte tokenizer (ASCII 0..255) + learned token embeddings with LayerNorm.</p>
+      
+      <div class="token-list" id="tokens-display">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="vector-preview-box">
+        <span class="box-label">Embedding Vector Sample (First 8 dims):</span>
+        <div class="vector-strip" id="embedding-vector-strip"></div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR 1 -->
+    <div class="flow-connector">
+      <svg class="connector-svg" width="36" height="100%">
+        <path d="M 0 50 C 18 50, 18 50, 36 50" stroke="rgba(147, 51, 234, 0.4)" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- BLOCK 2: SPARSE LATENT EXPANSION -->
+    <div class="arch-card" id="card-latent">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-step-num">2</span>
+          <h3>Sparse Latent Expansion</h3>
+        </div>
+        <span class="dim-tag">N = 1024 / head</span>
+      </div>
+      <p class="card-desc">
+        <code>x @ encoder ──► ReLU(x_latent)</code><br>
+        Cortical sparse coding: only ~28% of neurons fire; ~72% remain silent (0.0).
+      </p>
+
+      <div class="sparsity-stats-bar">
+        <div class="stat-item">
+          <span class="stat-val" id="active-neurons-count">292</span>
+          <span class="stat-lbl">Active Firing</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="silent-neurons-count">732</span>
+          <span class="stat-lbl">Silent (0.0)</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="sparsity-percent">71.5%</span>
+          <span class="stat-lbl">Sparsity</span>
+        </div>
+      </div>
+
+      <div class="neuron-grid-container">
+        <div class="neuron-grid-header">
+          <span>Latent Neurons Sample (64 neurons)</span>
+          <span class="neuron-legend">
+            <span class="legend-dot silent"></span> 0.0 (Silent)
+            <span class="legend-dot active"></span> >0 (Firing)
+          </span>
+        </div>
+        <div class="neuron-grid" id="neuron-sample-grid">
+          <!-- Rendered by app.js -->
+        </div>
+        <div class="tooltip" id="neuron-tooltip"></div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR 2 -->
+    <div class="flow-connector">
+      <svg class="connector-svg" width="36" height="100%">
+        <path d="M 0 50 C 18 50, 18 50, 36 50" stroke="rgba(59, 130, 246, 0.4)" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- BLOCK 3: SYNAPTIC ATTENTION & HEBBIAN MEMORY -->
+    <div class="arch-card featured-card" id="card-attention">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-step-num">3</span>
+          <h3>Synaptic Working Memory (Attention)</h3>
+        </div>
+        <div class="head-selector-pills" id="head-selector">
+          <button class="head-btn active" data-head="0">Head 0</button>
+          <button class="head-btn" data-head="1">Head 1</button>
+          <button class="head-btn" data-head="2">Head 2</button>
+          <button class="head-btn" data-head="3">Head 3</button>
+        </div>
+      </div>
+
+      <div class="view-toggle-bar">
+        <button class="toggle-view-btn active" id="view-attn-matrix">
+          Parallel Attention Matrix (Scores)
+        </button>
+        <button class="toggle-view-btn" id="view-hebbian-loop">
+          Sequential Hebbian Loop (ρ Accumulation)
+        </button>
+      </div>
+
+      <!-- VIEW A: Causal Attention Heatmap Matrix -->
+      <div id="attn-matrix-view" class="subview active">
+        <p class="card-desc">
+          <code>scores = tril(QR @ KRᵀ, -1)</code> — <strong>Strictly NO softmax</strong>. Unnormalized causal dot-products.
+        </p>
+        <div class="heatmap-table-container" id="heatmap-container">
+          <!-- Rendered by app.js -->
+        </div>
+        <div class="heatmap-legend">
+          <span>0.0 (Masked)</span>
+          <div class="legend-gradient"></div>
+          <span id="max-score-legend">Max (~112.6)</span>
+        </div>
+      </div>
+
+      <!-- VIEW B: Sequential Hebbian Loop -->
+      <div id="hebbian-loop-view" class="subview">
+        <p class="card-desc">
+          Step-by-step physical synaptic matrix updates: <code>ρ<sub>t+1</sub> = ρ<sub>t</sub> + k<sub>t</sub> ⊗ v<sub>t</sub></code>.
+        </p>
+        <div class="hebbian-stepper-controls">
+          <label>Token Step: <strong id="hebbian-step-label">Step 0 ('p')</strong></label>
+          <input type="range" id="hebbian-slider" min="0" max="4" value="0">
+        </div>
+        <div class="hebbian-metrics-grid" id="hebbian-metrics">
+          <!-- Rendered by app.js -->
+        </div>
+        <div class="hebbian-proof-callout">
+          ✓ <strong>Exact Equivalence Proof:</strong> Parallel attention output <code>scores @ x</code> and sequential loop <code>q<sub>t</sub> @ ρ<sub>t</sub></code> match with 0.00 numerical difference.
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR 3 -->
+    <div class="flow-connector">
+      <svg class="connector-svg" width="36" height="100%">
+        <path d="M 0 50 C 18 50, 18 50, 36 50" stroke="rgba(16, 185, 129, 0.4)" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- BLOCK 4: 3-FACTOR GATING & NEURON VECTOR SUM -->
+    <div class="arch-card featured-card" id="card-decoding">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-step-num">4</span>
+          <h3>Multiplicative Gating & Neuron Sum</h3>
+        </div>
+        <span class="dim-tag">y = ∑ a<sub>i</sub> · w<sub>i</sub></span>
+      </div>
+      <p class="card-desc">
+        <code>xy_sparse = x_sparse ⊙ y_sparse</code> (91% sparsity). The output vector is the direct linear sum of the few active neuron vectors!
+      </p>
+
+      <div class="gating-highlight-box">
+        <div class="gate-math">
+          <span>Input <strong>x<sub>sparse</sub></strong></span>
+          <span class="math-op">⊙</span>
+          <span>Memory <strong>y<sub>sparse</sub></strong></span>
+          <span class="math-op">═</span>
+          <span class="gate-result">Gated <strong>xy<sub>sparse</sub></strong> (91.1% silent)</span>
+        </div>
+      </div>
+
+      <div class="neuron-summation-panel">
+        <div class="panel-header">
+          <span>Top Contributing Neurons for Position <strong id="token-pos-label">'s'</strong>:</span>
+          <span class="small-badge">Active: <span id="active-voting-count">336</span> / 4096</span>
+        </div>
+        
+        <div class="neuron-voting-list" id="neuron-voting-list">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR 4 -->
+    <div class="flow-connector">
+      <svg class="connector-svg" width="36" height="100%">
+        <path d="M 0 50 C 18 50, 18 50, 36 50" stroke="rgba(245, 158, 11, 0.4)" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- BLOCK 5: OUTPUT DECODING & PROBABILITIES -->
+    <div class="arch-card" id="card-output">
+      <div class="card-header">
+        <div class="card-title-group">
+          <span class="card-step-num">5</span>
+          <h3>Next Token Prediction</h3>
+        </div>
+        <span class="dim-tag">P(token | prompt)</span>
+      </div>
+      <p class="card-desc">Vocabulary projection via <code>logits = x @ lm_head</code> and Softmax. Click any token to append!</p>
+
+      <div class="predictions-list" id="predictions-list">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="rollout-box">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+          <span class="box-label">Live Generated Output:</span>
+          <button id="regen-rollout-btn" class="preset-chip" style="font-size: 0.72rem; padding: 2px 8px;">🔄 Rollout</button>
+        </div>
+        <p class="rollout-text" id="rollout-text">Loading model continuation...</p>
+      </div>
+    </div>
+
+  </main>
+  </div> <!-- /llm-view-container -->
+
+  <!-- Interactive Explanation Footer / Modal Guide -->
+  <footer class="footer-explainer">
+    <div class="info-card">
+      <h4>💡 Key BDH Architecture Invariants</h4>
+      <ul>
+        <li><strong>No Softmax Normalization:</strong> Attention is strictly an unnormalized causal inner-product matrix.</li>
+        <li><strong>K ≡ Q Invariant:</strong> Key and Query share identical rotary representations ($QR = KR$).</li>
+        <li><strong>Biological Cortical Sparsity:</strong> Non-linear ReLU activations in the latent space zero out ~72% of neurons.</li>
+        <li><strong>Synaptic Working Memory Equivalence:</strong> Attention matrix multiplication is numerically identical to the sequential Hebbian outer-product loop $\rho_{t+1} = \rho_t + k_t \otimes v_t$.</li>
+        <li><strong>Neuron Vector Superposition:</strong> The output representation is literally $y = \sum_{i \in \text{Active}} a_i \cdot \mathbf{w}_i$.</li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
