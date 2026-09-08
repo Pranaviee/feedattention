@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.jpg" alt="BDH Synaptic Plasticity & Biological Memory" width="100%" />
+  <img src="images/synapse.jpg" alt="BDH Synaptic Plasticity & Biological Memory" width="100%" />
 </p>
 
 # BDH: Synaptic Plasticity & In-Context Recall Collapse
@@ -113,8 +113,8 @@ Full numerical tables and architectural descriptions are provided in [`results/c
 
 ```text
 ├── README.md                              # Project documentation
-├── assets/                                # Visual assets and banners
-│   └── banner.jpg                         # Synaptic plasticity hero banner
+├── images/                                # Visual assets and banners
+│   └── synapse.jpg                        # Synaptic plasticity hero banner
 ├── train_bdh_tinyshakespeare.py           # BDH training pipeline (Apple Silicon MPS / CUDA / CPU)
 ├── inference.py                           # CLI interactive text generation engine
 ├── input.txt                              # TinyShakespeare dataset (~1.1 MB)
