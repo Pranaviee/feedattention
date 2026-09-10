@@ -9,6 +9,7 @@
 *Pranavi Gottumukkala & Suday Nandan Reddy Samala*  
 *Indian Institute of Technology, Kharagpur*
 
+[![GitHub Code](https://img.shields.io/badge/Public_Code-github.com%2FPranaviee%2Ffeedattention-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Pranaviee/feedattention)
 [![Live Educational Tool](https://img.shields.io/badge/Live_Educational_Tool-dataforgeweb.sudaynandan95.workers.dev-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://dataforgeweb.sudaynandan95.workers.dev)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.8_CPU%2FMPS-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![React](https://img.shields.io/badge/Frontend-React_18_%7C_Vite-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
@@ -16,14 +17,12 @@
 
 ---
 
-## Live Educational Web Application
+## Official Submission Links
 
-The centerpiece of this submission is a unified, full-stack interactive learning platform designed for the **Educational Track**:
-
-> **Primary Live Tool URL:**  
-> ### **[https://dataforgeweb.sudaynandan95.workers.dev](https://dataforgeweb.sudaynandan95.workers.dev)**
-
-*This single public URL serves the complete interactive learning platform with live model inference and token-by-token checkpoint inspection.*
+* **Public GitHub Repository**: **[https://github.com/Pranaviee/feedattention](https://github.com/Pranaviee/feedattention)**  
+  *(Canonical public codebase containing all model training code, mathematical verification, precomputed datasets, and web application source).*
+* **Primary Live Interactive Tool**: **[https://dataforgeweb.sudaynandan95.workers.dev](https://dataforgeweb.sudaynandan95.workers.dev)**  
+  *(Single public URL serving the complete interactive learning platform with live model inference and token-by-token checkpoint inspection).*
 
 ---
 
@@ -123,8 +122,8 @@ You can reproduce both the interactive educational web application and the under
 * Node.js 18+ and npm
 
 ```bash
-git clone https://github.com/Pranaviee/dataforge_model.git
-cd dataforge_model
+git clone https://github.com/Pranaviee/feedattention.git
+cd feedattention
 ```
 
 ---
