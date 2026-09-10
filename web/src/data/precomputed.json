@@ -1,0 +1,1890 @@
+{
+  "meta": {
+    "generatedBy": "scripts/precompute.ts",
+    "baseSeed": 20260906,
+    "trials": 500,
+    "ds": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "ps": [
+      4,
+      8,
+      16,
+      24,
+      32,
+      48,
+      64,
+      96,
+      128,
+      192,
+      256
+    ],
+    "correlations": [
+      0,
+      0.25,
+      0.5
+    ]
+  },
+  "recallVsP": [
+    {
+      "d": 32,
+      "P": 4,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 8,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 16,
+      "correlation": 0,
+      "accuracy": 0.999375,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 24,
+      "correlation": 0,
+      "accuracy": 0.9943333333333333,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 32,
+      "correlation": 0,
+      "accuracy": 0.9835625,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 48,
+      "correlation": 0,
+      "accuracy": 0.9247916666666667,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 64,
+      "correlation": 0,
+      "accuracy": 0.8339375,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 96,
+      "correlation": 0,
+      "accuracy": 0.6166666666666667,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 128,
+      "correlation": 0,
+      "accuracy": 0.44846875,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 192,
+      "correlation": 0,
+      "accuracy": 0.25714583333333335,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 256,
+      "correlation": 0,
+      "accuracy": 0.1612578125,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 4,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 8,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 16,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 24,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 32,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 48,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 64,
+      "correlation": 0,
+      "accuracy": 0.9998125,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 96,
+      "correlation": 0,
+      "accuracy": 0.9965625,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 128,
+      "correlation": 0,
+      "accuracy": 0.98109375,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 192,
+      "correlation": 0,
+      "accuracy": 0.8946875,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 256,
+      "correlation": 0,
+      "accuracy": 0.7589375,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 4,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 8,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 16,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 24,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 32,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 48,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 64,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 96,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 128,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 192,
+      "correlation": 0,
+      "accuracy": 0.9999895833333333,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 256,
+      "correlation": 0,
+      "accuracy": 0.9999296875,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 4,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 8,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 16,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 24,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 32,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 48,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 64,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 96,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 128,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 192,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 256,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    }
+  ],
+  "recallVsPCorrelated": [
+    {
+      "d": 32,
+      "P": 4,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 8,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 16,
+      "correlation": 0,
+      "accuracy": 0.999375,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 24,
+      "correlation": 0,
+      "accuracy": 0.9943333333333333,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 32,
+      "correlation": 0,
+      "accuracy": 0.9835625,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 48,
+      "correlation": 0,
+      "accuracy": 0.9247916666666667,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 64,
+      "correlation": 0,
+      "accuracy": 0.8339375,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 96,
+      "correlation": 0,
+      "accuracy": 0.6166666666666667,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 128,
+      "correlation": 0,
+      "accuracy": 0.44846875,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 192,
+      "correlation": 0,
+      "accuracy": 0.25714583333333335,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 256,
+      "correlation": 0,
+      "accuracy": 0.1612578125,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 4,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 8,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 16,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 24,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 32,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 48,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 64,
+      "correlation": 0,
+      "accuracy": 0.9998125,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 96,
+      "correlation": 0,
+      "accuracy": 0.9965625,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 128,
+      "correlation": 0,
+      "accuracy": 0.98109375,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 192,
+      "correlation": 0,
+      "accuracy": 0.8946875,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 256,
+      "correlation": 0,
+      "accuracy": 0.7589375,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 4,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 8,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 16,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 24,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 32,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 48,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 64,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 96,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 128,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 192,
+      "correlation": 0,
+      "accuracy": 0.9999895833333333,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 256,
+      "correlation": 0,
+      "accuracy": 0.9999296875,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 4,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 8,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 16,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 24,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 32,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 48,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 64,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 96,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 128,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 192,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 256,
+      "correlation": 0,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 4,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 8,
+      "correlation": 0.25,
+      "accuracy": 0.979,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 16,
+      "correlation": 0.25,
+      "accuracy": 0.872875,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 24,
+      "correlation": 0.25,
+      "accuracy": 0.7536666666666667,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 32,
+      "correlation": 0.25,
+      "accuracy": 0.6135,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 48,
+      "correlation": 0.25,
+      "accuracy": 0.42504166666666665,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 64,
+      "correlation": 0.25,
+      "accuracy": 0.31953125,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 96,
+      "correlation": 0.25,
+      "accuracy": 0.19002083333333333,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 128,
+      "correlation": 0.25,
+      "accuracy": 0.128375,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 192,
+      "correlation": 0.25,
+      "accuracy": 0.06451041666666667,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 256,
+      "correlation": 0.25,
+      "accuracy": 0.0402734375,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 4,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 8,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 16,
+      "correlation": 0.25,
+      "accuracy": 0.9895,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 24,
+      "correlation": 0.25,
+      "accuracy": 0.95175,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 32,
+      "correlation": 0.25,
+      "accuracy": 0.88975,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 48,
+      "correlation": 0.25,
+      "accuracy": 0.7480833333333333,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 64,
+      "correlation": 0.25,
+      "accuracy": 0.61603125,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 96,
+      "correlation": 0.25,
+      "accuracy": 0.41825,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 128,
+      "correlation": 0.25,
+      "accuracy": 0.29484375,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 192,
+      "correlation": 0.25,
+      "accuracy": 0.15834375,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 256,
+      "correlation": 0.25,
+      "accuracy": 0.0974375,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 4,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 8,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 16,
+      "correlation": 0.25,
+      "accuracy": 0.999875,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 24,
+      "correlation": 0.25,
+      "accuracy": 0.9990833333333333,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 32,
+      "correlation": 0.25,
+      "accuracy": 0.9928125,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 48,
+      "correlation": 0.25,
+      "accuracy": 0.9592916666666667,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 64,
+      "correlation": 0.25,
+      "accuracy": 0.89725,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 96,
+      "correlation": 0.25,
+      "accuracy": 0.7303333333333333,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 128,
+      "correlation": 0.25,
+      "accuracy": 0.58178125,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 192,
+      "correlation": 0.25,
+      "accuracy": 0.3602708333333333,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 256,
+      "correlation": 0.25,
+      "accuracy": 0.2523125,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 4,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 8,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 16,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 24,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 32,
+      "correlation": 0.25,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 48,
+      "correlation": 0.25,
+      "accuracy": 0.9992083333333334,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 64,
+      "correlation": 0.25,
+      "accuracy": 0.9958125,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 96,
+      "correlation": 0.25,
+      "accuracy": 0.9595625,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 128,
+      "correlation": 0.25,
+      "accuracy": 0.8940625,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 192,
+      "correlation": 0.25,
+      "accuracy": 0.7108854166666667,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 256,
+      "correlation": 0.25,
+      "accuracy": 0.519390625,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 4,
+      "correlation": 0.5,
+      "accuracy": 0.9645,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 8,
+      "correlation": 0.5,
+      "accuracy": 0.72275,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 16,
+      "correlation": 0.5,
+      "accuracy": 0.41025,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 24,
+      "correlation": 0.5,
+      "accuracy": 0.27008333333333334,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 32,
+      "correlation": 0.5,
+      "accuracy": 0.1771875,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 48,
+      "correlation": 0.5,
+      "accuracy": 0.10816666666666666,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 64,
+      "correlation": 0.5,
+      "accuracy": 0.073625,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 96,
+      "correlation": 0.5,
+      "accuracy": 0.0411875,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 128,
+      "correlation": 0.5,
+      "accuracy": 0.028765625,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 192,
+      "correlation": 0.5,
+      "accuracy": 0.015677083333333335,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 256,
+      "correlation": 0.5,
+      "accuracy": 0.010171875,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 4,
+      "correlation": 0.5,
+      "accuracy": 0.998,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 8,
+      "correlation": 0.5,
+      "accuracy": 0.89125,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 16,
+      "correlation": 0.5,
+      "accuracy": 0.612125,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 24,
+      "correlation": 0.5,
+      "accuracy": 0.4195,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 32,
+      "correlation": 0.5,
+      "accuracy": 0.29625,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 48,
+      "correlation": 0.5,
+      "accuracy": 0.16983333333333334,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 64,
+      "correlation": 0.5,
+      "accuracy": 0.11421875,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 96,
+      "correlation": 0.5,
+      "accuracy": 0.06420833333333334,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 128,
+      "correlation": 0.5,
+      "accuracy": 0.0439375,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 192,
+      "correlation": 0.5,
+      "accuracy": 0.023520833333333335,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 256,
+      "correlation": 0.5,
+      "accuracy": 0.01475,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 4,
+      "correlation": 0.5,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 8,
+      "correlation": 0.5,
+      "accuracy": 0.989,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 16,
+      "correlation": 0.5,
+      "accuracy": 0.845875,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 24,
+      "correlation": 0.5,
+      "accuracy": 0.64525,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 32,
+      "correlation": 0.5,
+      "accuracy": 0.5018125,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 48,
+      "correlation": 0.5,
+      "accuracy": 0.30391666666666667,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 64,
+      "correlation": 0.5,
+      "accuracy": 0.2039375,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 96,
+      "correlation": 0.5,
+      "accuracy": 0.1111875,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 128,
+      "correlation": 0.5,
+      "accuracy": 0.07690625,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 192,
+      "correlation": 0.5,
+      "accuracy": 0.036885416666666664,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 256,
+      "correlation": 0.5,
+      "accuracy": 0.0239609375,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 4,
+      "correlation": 0.5,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 8,
+      "correlation": 0.5,
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 16,
+      "correlation": 0.5,
+      "accuracy": 0.976125,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 24,
+      "correlation": 0.5,
+      "accuracy": 0.8846666666666667,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 32,
+      "correlation": 0.5,
+      "accuracy": 0.760875,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 48,
+      "correlation": 0.5,
+      "accuracy": 0.5332083333333333,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 64,
+      "correlation": 0.5,
+      "accuracy": 0.38521875,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 96,
+      "correlation": 0.5,
+      "accuracy": 0.21752083333333333,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 128,
+      "correlation": 0.5,
+      "accuracy": 0.134421875,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 192,
+      "correlation": 0.5,
+      "accuracy": 0.07545833333333334,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 256,
+      "correlation": 0.5,
+      "accuracy": 0.0444375,
+      "trials": 500
+    }
+  ],
+  "snrCurve": [
+    {
+      "d": 32,
+      "P": 4,
+      "correlation": 0,
+      "measured": 3.9290429747900526,
+      "theory": 3.265986323710904,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 8,
+      "correlation": 0,
+      "measured": 2.2703131328172317,
+      "theory": 2.138089935299395,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 16,
+      "correlation": 0,
+      "measured": 1.4890323854716097,
+      "theory": 1.4605934866804429,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 24,
+      "correlation": 0,
+      "measured": 1.2033602943252233,
+      "theory": 1.179535649239177,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 32,
+      "correlation": 0,
+      "measured": 1.0335744133052585,
+      "theory": 1.016001016001524,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 48,
+      "correlation": 0,
+      "measured": 0.8358458330226065,
+      "theory": 0.8251369970070347,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 64,
+      "correlation": 0,
+      "measured": 0.7207712845433061,
+      "theory": 0.7126966450997984,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 96,
+      "correlation": 0,
+      "measured": 0.5861212156075809,
+      "theory": 0.5803810000880093,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 128,
+      "correlation": 0,
+      "measured": 0.507049106780152,
+      "theory": 0.5019646441105269,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 192,
+      "correlation": 0,
+      "measured": 0.4134370458781413,
+      "theory": 0.4093156080773207,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 256,
+      "correlation": 0,
+      "measured": 0.3576153643479223,
+      "theory": 0.3542459542160381,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 4,
+      "correlation": 0,
+      "measured": 5.504150323720031,
+      "theory": 4.618802153517006,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 8,
+      "correlation": 0,
+      "measured": 3.192868213860431,
+      "theory": 3.0237157840738176,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 16,
+      "correlation": 0,
+      "measured": 2.1154233344195377,
+      "theory": 2.065591117977289,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 24,
+      "correlation": 0,
+      "measured": 1.6898081003420014,
+      "theory": 1.6681153124565982,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 32,
+      "correlation": 0,
+      "measured": 1.456300317926419,
+      "theory": 1.4368424162141993,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 48,
+      "correlation": 0,
+      "measured": 1.1791641731977136,
+      "theory": 1.1669199319831565,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 64,
+      "correlation": 0,
+      "measured": 1.0163761032716763,
+      "theory": 1.0079052613579393,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 96,
+      "correlation": 0,
+      "measured": 0.8259456424451768,
+      "theory": 0.8207826816681233,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 128,
+      "correlation": 0,
+      "measured": 0.7146498458813678,
+      "theory": 0.709885207532891,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 192,
+      "correlation": 0,
+      "measured": 0.5825101510981734,
+      "theory": 0.5788596842339373,
+      "trials": 500
+    },
+    {
+      "d": 64,
+      "P": 256,
+      "correlation": 0,
+      "measured": 0.503168400528682,
+      "theory": 0.5009794328681196,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 4,
+      "correlation": 0,
+      "measured": 7.856888446291233,
+      "theory": 6.531972647421808,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 8,
+      "correlation": 0,
+      "measured": 4.512653484730707,
+      "theory": 4.27617987059879,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 16,
+      "correlation": 0,
+      "measured": 2.9892744806881897,
+      "theory": 2.9211869733608857,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 24,
+      "correlation": 0,
+      "measured": 2.388595608453307,
+      "theory": 2.359071298478354,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 32,
+      "correlation": 0,
+      "measured": 2.060469631928182,
+      "theory": 2.032002032003048,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 48,
+      "correlation": 0,
+      "measured": 1.6600279154371933,
+      "theory": 1.6502739940140694,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 64,
+      "correlation": 0,
+      "measured": 1.433743645153662,
+      "theory": 1.4253932901995967,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 96,
+      "correlation": 0,
+      "measured": 1.1669256695488723,
+      "theory": 1.1607620001760186,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 128,
+      "correlation": 0,
+      "measured": 1.0083218838360042,
+      "theory": 1.0039292882210538,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 192,
+      "correlation": 0,
+      "measured": 0.8209509584605557,
+      "theory": 0.8186312161546414,
+      "trials": 500
+    },
+    {
+      "d": 128,
+      "P": 256,
+      "correlation": 0,
+      "measured": 0.7107119121113508,
+      "theory": 0.7084919084320762,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 4,
+      "correlation": 0,
+      "measured": 11.141253571285095,
+      "theory": 9.237604307034012,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 8,
+      "correlation": 0,
+      "measured": 6.37205548279594,
+      "theory": 6.047431568147635,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 16,
+      "correlation": 0,
+      "measured": 4.225827834405033,
+      "theory": 4.131182235954578,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 24,
+      "correlation": 0,
+      "measured": 3.3913409357475013,
+      "theory": 3.3362306249131963,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 32,
+      "correlation": 0,
+      "measured": 2.90727780970696,
+      "theory": 2.8736848324283986,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 48,
+      "correlation": 0,
+      "measured": 2.3435815216876867,
+      "theory": 2.333839863966313,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 64,
+      "correlation": 0,
+      "measured": 2.0266902912349907,
+      "theory": 2.0158105227158787,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 96,
+      "correlation": 0,
+      "measured": 1.6476955333146912,
+      "theory": 1.6415653633362466,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 128,
+      "correlation": 0,
+      "measured": 1.4237129352789228,
+      "theory": 1.419770415065782,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 192,
+      "correlation": 0,
+      "measured": 1.15997676698153,
+      "theory": 1.1577193684678746,
+      "trials": 500
+    },
+    {
+      "d": 256,
+      "P": 256,
+      "correlation": 0,
+      "measured": 1.00349458734858,
+      "theory": 1.0019588657362393,
+      "trials": 500
+    }
+  ],
+  "metricComparison": [
+    {
+      "d": 32,
+      "P": 8,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 8,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 8,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 16,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 16,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 16,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.99875,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 24,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 24,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 24,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.9945833333333334,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 32,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 32,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 32,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.984,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 48,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 48,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 48,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.9265,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 64,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 64,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 64,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.83121875,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 96,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 96,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 96,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.6218958333333333,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 128,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 128,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 128,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.45225,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 192,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 192,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 192,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.25597916666666665,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 256,
+      "valueKind": "onehot",
+      "metric": "nearest",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 256,
+      "valueKind": "onehot",
+      "metric": "argmaxCoord",
+      "accuracy": 1,
+      "trials": 500
+    },
+    {
+      "d": 32,
+      "P": 256,
+      "valueKind": "unit",
+      "metric": "nearest",
+      "accuracy": 0.1589375,
+      "trials": 500
+    }
+  ],
+  "memoryFootprint": [
+    {
+      "T": 10,
+      "transformerKV": 5120,
+      "bdhTable": 2097152
+    },
+    {
+      "T": 100,
+      "transformerKV": 51200,
+      "bdhTable": 2097152
+    },
+    {
+      "T": 1000,
+      "transformerKV": 512000,
+      "bdhTable": 2097152
+    },
+    {
+      "T": 10000,
+      "transformerKV": 5120000,
+      "bdhTable": 2097152
+    },
+    {
+      "T": 100000,
+      "transformerKV": 51200000,
+      "bdhTable": 2097152
+    }
+  ]
+}

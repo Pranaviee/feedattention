@@ -1,0 +1,6 @@
+node_modules
+dist
+livemodel/.venv
+.git
+**/.DS_Store
+**/__pycache__

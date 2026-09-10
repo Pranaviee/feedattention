@@ -31,3 +31,11 @@ ENV/
 .DS_Store
 *.swp
 *.swo
+
+# Node / Web
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.local
+livemodel/.venv/

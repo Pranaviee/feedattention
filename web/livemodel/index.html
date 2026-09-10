@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDH checkpoint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="style.css?v=compact-h4">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+</head>
+<body>
+  <header class="toolbar">
+    <div class="toolbar-copy">
+      <p class="toolbar-kicker">Trained checkpoint</p>
+      <h1 class="toolbar-title">Inspect the n×d table at full scale</h1>
+    </div>
+    <div class="header-controls">
+      <label class="control-pill" id="model-select-pill">
+        <span>Model</span>
+        <select id="model-select">
+          <option value="bdh_d64">d=64 · 4 layers</option>
+          <option value="bdh_d128">d=128 · 4 layers</option>
+        </select>
+      </label>
+      <label class="control-pill" id="temp-slider-pill">
+        <span>Temp <strong id="temp-val">0.75</strong></span>
+        <input type="range" id="temp-slider" min="0.1" max="1.5" step="0.05" value="0.75">
+      </label>
+      <a href="https://github.com/pathwaycom/bdh" target="_blank" rel="noreferrer" class="github-link">Paper source</a>
+    </div>
+  </header>
+
+  <section class="prompt-bar">
+    <div class="prompt-input-container">
+      <label class="prompt-label" for="prompt-input">Prompt</label>
+      <input type="text" id="prompt-input" value="paris" placeholder="Type a prompt…" autocomplete="off">
+      <span class="trace-word-label" id="trace-word-label">T = —</span>
+      <button id="step-btn" class="secondary-btn" type="button">Step +1 token</button>
+      <button id="generate-btn" class="accent-btn" type="button">Generate 50 tokens</button>
+    </div>
+    <div class="presets-row">
+      <span class="presets-label">Examples</span>
+      <button class="preset-chip active" data-text="paris" type="button">paris</button>
+      <button class="preset-chip" data-text="ROMEO: " type="button">ROMEO:</button>
+      <button class="preset-chip" data-text="KING: " type="button">KING:</button>
+      <button class="preset-chip" data-text="Before we proceed" type="button">Before we proceed</button>
+      <button class="preset-chip" data-text="The world is" type="button">The world is</button>
+    </div>
+  </section>
+
+  <div class="layer-nav-bar">
+    <div class="layer-tabs" id="layer-tabs">
+      <button class="layer-tab active" data-layer="0" type="button">Layer 0</button>
+      <button class="layer-tab" data-layer="1" type="button">Layer 1</button>
+      <button class="layer-tab" data-layer="2" type="button">Layer 2</button>
+      <button class="layer-tab" data-layer="3" type="button">Layer 3</button>
+    </div>
+    <div class="layer-meta-tags" id="layer-meta-tags">
+      <span class="badge" id="layer-sparsity-badge">Sparsity: —</span>
+      <span class="badge" id="layer-delta-badge">Δ norm: —</span>
+      <span class="badge" id="layer-cossim-badge">Cos sim: —</span>
+    </div>
+  </div>
+
+  <main class="architecture-canvas">
+    <article class="arch-card" id="card-tokens">
+      <div class="card-header">
+        <h3>1 · Tokens &amp; embedding</h3>
+        <span class="dim-tag">x ∈ ℝ<sup>(T × d)</sup></span>
+      </div>
+      <p class="card-desc">Byte tokenizer (ASCII 0–255) and a learned embedding with LayerNorm.</p>
+      <div class="token-list" id="tokens-display"></div>
+      <div class="vector-preview-box">
+        <span class="box-label">Embedding sample (first 8 dims)</span>
+        <div class="vector-strip" id="embedding-vector-strip"></div>
+      </div>
+    </article>
+
+    <article class="arch-card" id="card-latent">
+      <div class="card-header">
+        <h3>2 · Sparse latent expansion</h3>
+        <span class="dim-tag">n neurons / head</span>
+      </div>
+      <p class="card-desc">
+        <span class="eq" data-tex="k = \mathrm{ReLU}(xE)"></span>
+        — most neurons stay silent. The firing pattern is the address into ρ.
+      </p>
+      <div class="sparsity-stats-bar">
+        <div class="stat-item">
+          <span class="stat-val" id="active-neurons-count">—</span>
+          <span class="stat-lbl">Firing</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="silent-neurons-count">—</span>
+          <span class="stat-lbl">Silent</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="sparsity-percent">—</span>
+          <span class="stat-lbl">Sparsity</span>
+        </div>
+      </div>
+      <div class="sparsity-meter" title="Silent fraction of the latent">
+        <div class="sparsity-meter-fill" id="sparsity-meter-fill"></div>
+      </div>
+      <div class="neuron-grid-container">
+        <div class="neuron-grid-header">
+          <span>64-neuron sample</span>
+          <span class="neuron-legend">
+            <span class="legend-dot silent"></span> silent
+            <span class="legend-dot active"></span> firing
+          </span>
+        </div>
+        <div class="neuron-grid" id="neuron-sample-grid"></div>
+      </div>
+    </article>
+
+    <article class="arch-card featured-card" id="card-attention">
+      <div class="card-header">
+        <h3>3 · Synaptic working memory</h3>
+        <div class="head-selector-pills" id="head-selector">
+          <button class="head-btn active" data-head="0" type="button">Head 0</button>
+          <button class="head-btn" data-head="1" type="button">Head 1</button>
+          <button class="head-btn" data-head="2" type="button">Head 2</button>
+          <button class="head-btn" data-head="3" type="button">Head 3</button>
+        </div>
+      </div>
+      <div class="view-toggle-bar">
+        <button class="toggle-view-btn active" id="view-attn-matrix" type="button">Parallel scores</button>
+        <button class="toggle-view-btn" id="view-hebbian-loop" type="button">Hebbian ρ loop</button>
+      </div>
+      <div id="attn-matrix-view" class="subview active">
+        <p class="card-desc">
+          <span class="eq" data-tex="\mathrm{scores}=\mathrm{tril}(QK^{\mathsf{T}},-1)"></span>
+          — unnormalized, no softmax. K and Q share the same rotary map.
+        </p>
+        <div class="heatmap-table-container" id="heatmap-container"></div>
+        <div class="heatmap-legend">
+          <span>0 (masked)</span>
+          <div class="legend-gradient"></div>
+          <span id="max-score-legend">Max</span>
+        </div>
+      </div>
+      <div id="hebbian-loop-view" class="subview">
+        <p class="card-desc">
+          Sequential writes
+          <span class="eq" data-tex="\rho_{t+1}=\rho_t + k_t \otimes v_t"></span>.
+          Same numbers as the parallel scores.
+        </p>
+        <div class="hebbian-stepper-controls">
+          <label>Token step: <strong id="hebbian-step-label">—</strong></label>
+          <input type="range" id="hebbian-slider" min="0" max="4" value="0">
+        </div>
+        <div class="hebbian-metrics-grid" id="hebbian-metrics"></div>
+        <p class="hebbian-proof-callout">
+          Parallel <code>scores · x</code> and sequential <code>q<sub>t</sub>ᵀ ρ<sub>t</sub></code> match to numerical zero on this checkpoint.
+        </p>
+      </div>
+    </article>
+
+    <article class="arch-card featured-card" id="card-decoding">
+      <div class="card-header">
+        <h3>4 · Gating &amp; neuron sum</h3>
+        <span class="dim-tag">y = Σ a<sub>i</sub> w<sub>i</sub></span>
+      </div>
+      <p class="card-desc">
+        <span class="eq" data-tex="xy_{\mathrm{sparse}}=x_{\mathrm{sparse}}\odot y_{\mathrm{sparse}}"></span>.
+        The output is a linear sum of the few neurons that fired.
+      </p>
+      <div class="gating-highlight-box">
+        <div class="gate-math">
+          <span>x<sub>sparse</sub></span>
+          <span class="math-op">⊙</span>
+          <span>y<sub>sparse</sub></span>
+          <span class="math-op">=</span>
+          <span class="gate-result">xy<sub>sparse</sub></span>
+        </div>
+      </div>
+      <div class="neuron-summation-panel">
+        <div class="panel-header">
+          <span>Top contributing neurons for <strong id="token-pos-label">—</strong></span>
+          <span class="small-badge">Active: <span id="active-voting-count">—</span></span>
+        </div>
+        <div class="neuron-voting-list" id="neuron-voting-list"></div>
+      </div>
+    </article>
+
+    <article class="arch-card" id="card-output">
+      <div class="card-header">
+        <h3>5 · Next token</h3>
+        <span class="dim-tag">logits = x W<sub>out</sub></span>
+      </div>
+      <p class="card-desc">Click a prediction to append it to the prompt.</p>
+      <div class="predictions-list" id="predictions-list"></div>
+      <div class="rollout-box">
+        <div class="rollout-head">
+          <span class="box-label">Continuation</span>
+          <button id="regen-rollout-btn" class="preset-chip" type="button">Generate 50</button>
+        </div>
+        <p class="rollout-text" id="rollout-text">Loading model continuation…</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer-explainer">
+    <h4>What this checkpoint is doing</h4>
+    <ul>
+      <li>Attention is an unnormalized causal inner product — no softmax.</li>
+      <li>Key and query share one rotary map (K ≡ Q).</li>
+      <li>ReLU in neuron space zeros most of the address.</li>
+      <li>The parallel scores equal the sequential write <span class="eq" data-tex="\rho \leftarrow \rho + k \otimes v^{\mathsf{T}}"></span> and read <span class="eq" data-tex="q^{\mathsf{T}}\rho"></span>.</li>
+    </ul>
+  </footer>
+
+  <script defer src="app.js?v=compact-h4"></script>
+</body>
+</html>
