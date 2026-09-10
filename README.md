@@ -52,10 +52,6 @@ The educational web application guides learners through four structured stages:
 
 ## Theoretical Foundations
 
-<p align="center">
-  <img src="bdh_ref/figs/architecture.png" alt="BDH Architecture Diagram" width="85%" />
-</p>
-
 ### 1. Replaying KV-Cache as a Synaptic Weight Matrix
 
 In standard Transformers, self-attention allows tokens to attend to all preceding tokens *including themselves* ($\tau \le t$). 
@@ -82,18 +78,21 @@ $$\max |Y_{\text{parallel}} - Y_{\text{Hebbian}}| < 10^{-15}$$
 
 ### 2. The Superposition Trade-off and Recall Collapse
 
-Under a fixed-size synaptic memory matrix $\rho_t \in \mathbb{R}^{n \times d}$, sequential associative storage incurs additive superposition interference.
+In the theoretical framework of the BDH paper (**Claim 8, Appendix C.2**), memory retrieval is analyzed as an associative reconstruction problem:
+* Let $a_q \in \mathbb{R}^d$ denote the **ground-truth target value vector** stored at historical timestep $q < t$.
+* Let $a^*_q \in \mathbb{R}^d$ denote the **empirical reconstructed readout vector** retrieved by probing the accumulated synaptic memory $\rho_t = \sum_{j < t} K_j^\top V_j$ with key $K_q$. The asterisk ($*$) is the standard estimation notation denoting the retrieved estimate of the target vector $a_q$.
 
-For an associative recall probe of an item stored at timestep $q < t$, querying the accumulated matrix $\rho_t = \sum_{j < t} K_j^\top V_j$ with normalized key $K_q$ yields:
+Normalizing by the self-gain $\|K_q\|^2 = K_q K_q^\top$, the retrieved vector $a^*_q$ decomposes into the target signal and additive superposition interference:
 
-$$a^*_q = \frac{K_q \rho_t}{\|K_q\|^2} = \underbrace{V_q}_{\text{Target Vector}} + \underbrace{\sum_{\substack{j < t \\ j \neq q}} \frac{K_q K_j^\top}{\|K_q\|^2} V_j}_{\text{Superposition Interference}}$$
+$$a^*_q = \frac{K_q \rho_t}{\|K_q\|^2} = \underbrace{a_q}_{\text{Target Signal}} + \underbrace{\sum_{\substack{j < t \\ j \neq q}} \frac{K_q K_j^\top}{\|K_q\|^2} a_j}_{\text{Superposition Interference}}$$
 
-Under Claim 8 (Appendix C.2 of the BDH paper), for latent dimension $n$ and key correlation coefficient $C$, the $L_2$ reconstruction error relative to the target vector scales as:
+#### Theoretical Lower Bound (Claim 8, Appendix C.2)
+Kosowski et al. formally prove that for latent neuron dimension $n$, context length $t$, and pairwise key correlation coefficient $C$, the $L_2$ reconstruction error between the retrieved readout $a^*_q$ and the ground-truth target $a_q$ satisfies:
 
-$$\|a^*_q - V_q\|_2 = O(\sqrt{\delta}), \quad \text{where } \delta > \frac{t \cdot (C + 1) \log n}{n}$$
+$$\|a^*_q - a_q\|_2 = O(\sqrt{\delta}), \quad \text{where } \delta > \frac{t \cdot (C + 1) \log n}{n}$$
 
-* **Independent Cues ($C = 0$)**: When keys are near-orthogonal, the interference variance scales as $O(t / n)$, maintaining bounded $L_2$ retrieval error across moderate sequence lengths.
-* **Correlated Cues ($C > 0$)**: When keys share positive pairwise correlation, the expectation $\mathbb{E}[K_q K_j^\top] > 0$ introduces systematic positive drift, accelerating retrieval error and causing recall collapse well before sequence length approaches latent dimension $n$.
+* **Independent Cues ($C = 0$)**: When keys are near-orthogonal, the cross-product expectation satisfies $\mathbb{E}[K_q K_j^\top] = 0$. The interference variance scales slowly as $O(t / n)$, maintaining low $L_2$ error and preserving nearest-neighbor recall accuracy over moderate sequence lengths.
+* **Correlated Cues ($C > 0$)**: When stored cues share semantic overlap or correlation, $\mathbb{E}[K_q K_j^\top] > 0$ introduces systematic positive drift. Interference compounds constructively across timesteps, causing the retrieved vector $a^*_q$ to rapidly diverge from target $a_q$ and precipitating **In-Context Recall Collapse** well before sequence length $t$ reaches latent dimension $n$.
 
 <p align="center">
   <img src="results/checkpoint_correlation_recall_collapse.png" alt="Checkpoint Recall Collapse Benchmark" width="90%" />
