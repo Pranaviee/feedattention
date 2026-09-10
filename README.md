@@ -3,40 +3,50 @@
 </p>
 
 # Synaptic Plasticity & In-Context Recall Collapse
-### Bridging Transformer Attention with Biologically Grounded Hebbian Working Memory
+### An Interactive Educational Explainer Bridging Biological Hebbian Memory with Transformers
 
 **Team feedattention**  
 *Pranavi Gottumukkala & Suday Nandan Reddy Samala*  
 *Indian Institute of Technology, Kharagpur*
 
-[![Live Demo](https://img.shields.io/badge/Live_Explainer-Cloudflare_Workers-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://dataforgeweb.pages.dev)
-[![API Status](https://img.shields.io/badge/API_Status-Render_Healthy-46E3B7?style=flat-square&logo=render&logoColor=black)](https://sudaynandan.onrender.com/health)
+[![Live Educational Tool](https://img.shields.io/badge/Live_Educational_Tool-dataforgeweb.sudaynandan95.workers.dev-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://dataforgeweb.sudaynandan95.workers.dev)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.8_CPU%2FMPS-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![React](https://img.shields.io/badge/Frontend-React_18_%7C_Vite-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![Paper Reference](https://img.shields.io/badge/Paper-arXiv%3A2509.26507-b31b1b?style=flat-square)](https://doi.org/10.48550/arXiv.2509.26507)
 
 ---
 
-## Overview
+## Live Educational Web Application
 
-Modern sequence models face a critical trade-off between memory footprint and in-context learning capability during inference. Standard Transformers store context by explicitly appending Key-Value (KV) vectors to an ever-growing cache, incurring a linear $O(t)$ memory cost and quadratic $O(t^2)$ attention computational complexity. Non-Hebbian alternatives such as State-Space Models (SSMs, like Mamba) and recurrent architectures (like xLSTM) compress sequence history into a fixed-size hidden state vector, but because their transition matrices are frozen at inference, squeezing an unbounded stream of information into a static activation vector causes exponential decay.
+The centerpiece of this submission is a unified, full-stack interactive learning platform designed for the **Educational Track**:
 
-**Biological Working Memory via Synaptic Plasticity:**  
-The human brain does not preserve a growing historical list of previous activation states, nor does it squeeze context into frozen vector paths. Instead, biological working memory relies on **synaptic plasticity**—the temporary, activity-dependent strengthening of connections (synapses) between neurons. 
+> **Primary Live Tool URL:**  
+> ### **[https://dataforgeweb.sudaynandan95.workers.dev](https://dataforgeweb.sudaynandan95.workers.dev)**
 
-In the **Dragon Hatchling (BDH)** architecture (Kosowski et al., 2025), this biological principle is translated into dynamic "fast-weights" that update at test time:
-* **Constant State Size ($n \times d$)**: Rather than retaining an expanding KV cache, associations are directly stored by updating an unnormalized synaptic weight matrix ($W_t = W_{t-1} + k_t v_t^\top$) that never grows in size.
-* **Falsifiable Scientific Claim**: *A fixed-size synaptic memory can encode unbounded associations, but recall degrades with increasing load and deteriorates sharply when stored cues overlap.*
-* **Interactive Educational Tool**: Designed for students, researchers, and newcomers to machine learning and neuroscience, our accompanying web tool helps learners visualize neuronal connections, layer-wise sparsity patterns, and mathematical synaptic updates in real time.
+*This single public URL serves the complete interactive learning platform with live model inference and token-by-token checkpoint inspection.*
 
 ---
 
-## Live Deployments
+## Educational Track Overview
 
-| Service | Hosting | Status | Link |
-| :--- | :---: | :---: | :--- |
-| Interactive Web Explainer | Cloudflare Workers / Pages | Active | [dataforgeweb.pages.dev](https://dataforgeweb.pages.dev) |
-| Live Checkpoint API | Render (Docker / CPU PyTorch) | Active | [sudaynandan.onrender.com/health](https://sudaynandan.onrender.com/health) |
+### Pedagogical Motivation
+While modern deep learning curricula focus primarily on softmax attention and autoregressive KV caching, biologically grounded alternatives like **Baby Dragon Hatchling (BDH)** (Kosowski et al., 2025) introduce unnormalized associative plasticity that diverges significantly from standard sequence models.
+
+This project was developed as an **interactive educational platform** to provide a rigorous, visual bridge between the theoretical mathematics and physical network mechanics.
+
+### Target Audience & Learning Objectives
+* **Audience**: Students, researchers, and practitioners in machine learning and computational neuroscience.
+* **Core Objectives**: Provide direct visual and numerical inspection of the underlying synaptic dynamics: how Hebbian plasticity substitutes for dynamic KV caching, how sparse monosemantic activations constrain synaptic updates, and how additive superposition noise induces **In-Context Recall Collapse**.
+
+### The Guided 4-Beat Learning Flow
+The educational web application guides learners through four structured stages:
+1. **Beat 1: The Short-Term Memory Bottleneck**: Visualizes why traditional Transformer KV caches scale linearly ($O(t)$ memory, $O(t^2)$ attention complexity) and establishes the core question: *Can a neural network store unbounded context in a fixed-size memory that never grows?*
+2. **Beat 2: Biological Synaptic Plasticity**: Demonstrates Donald Hebb's 80-year-old principle (*"Neurons that fire together, wire together"*). Users see an unnormalized $n \times d$ synaptic matrix update step-by-step via outer products ($W_t = W_{t-1} + k_t v_t^\top$) with sparse ReLU activations.
+3. **Beat 3: The Superposition Trade-off & Recall Collapse**: An interactive experimental sandbox driven by empirical and theoretical data. Learners use interactive sliders (context length, cue correlation, memory dimension) to observe additive superposition interference and evaluate where retrieval accuracy degrades.
+4. **Beat 4: Live Checkpoint Inspector**: Connects the theoretical toy model to full-scale, real-world trained checkpoints (`bdh_d64.pt` and `bdh_d128.pt`). Learners enter custom prompts, step token-by-token through individual model layers, observe real-time sparsity percentages, and generate autoregressive completions directly from the running network.
+
+### The Falsifiable Scientific Claim
+> *A fixed-size synaptic memory can encode unbounded associations, but recall degrades with increasing load and deteriorates sharply when stored cues overlap.*
 
 ---
 
@@ -48,38 +58,42 @@ In the **Dragon Hatchling (BDH)** architecture (Kosowski et al., 2025), this bio
 
 ### 1. Replaying KV-Cache as a Synaptic Weight Matrix
 
-Standard Transformers apply row-wise softmax across attention matrices: $\text{Attention}(Q, K, V) = \text{softmax}(Q K^\top / \sqrt{d}) V$. 
+In standard Transformers, self-attention allows tokens to attend to all preceding tokens *including themselves* ($\tau \le t$). 
 
-In BDH, causal unnormalized linear attention ties queries and keys directly to a sparse positive neuronal activation vector $Q_t = K_t = x_t \in \mathbb{R}_{\ge 0}^{1 \times n}$, with projected values $V_t = v_t \in \mathbb{R}^{1 \times d}$. Token retrieval is governed by:
+In BDH, causal attention enforces strict physical causality with a zero-diagonal mask ($\text{tril}(Q K^\top, -1)$): **the current token queries prior synaptic memory ($\tau < t$) before writing its own association, so a token never attends to itself**.
 
-$$Y_t = \sum_{\tau \le t} (Q_t K_\tau^\top) V_\tau$$
+Tying queries and keys directly to the sparse positive neuronal activation vector $Q_t = K_t = x_t \in \mathbb{R}_{\ge 0}^{1 \times n}$ with projected values $V_t = v_t \in \mathbb{R}^{1 \times d}$, token retrieval is governed strictly over prior tokens:
 
-As activations enter the network, historical associations accumulate directly into the synaptic weight matrix $\sigma_t \in \mathbb{R}^{n \times d}$ via outer-product Hebbian updates modulated by a retention decay $\lambda \in (0, 1]$:
+$$Y_t = \sum_{\tau < t} (Q_t K_\tau^\top) V_\tau$$
 
-$$\sigma_t = \lambda \sigma_{t-1} + x_t^\top v_t = \sum_{\tau \le t} \lambda^{t-\tau} x_\tau^\top v_\tau$$
+In the sequential Hebbian loop, associations from prior timesteps accumulate into the synaptic weight matrix $\sigma_t \in \mathbb{R}^{n \times d}$ via outer-product updates modulated by a retention decay $\lambda \in (0, 1]$:
 
-When the current activation $x_t$ enters the circuit, retrieval occurs simply by driving the signal forward through these accumulated synaptic weights:
+$$\sigma_t = \lambda \sigma_{t-1} + x_{t-1}^\top v_{t-1} = \sum_{\tau < t} \lambda^{t-1-\tau} x_\tau^\top v_\tau$$
 
-$$y_t = x_t \sigma_t = x_t \left( \sum_{\tau \le t} \lambda^{t-\tau} x_\tau^\top v_\tau \right) = \sum_{\tau \le t} \lambda^{t-\tau} (x_t x_\tau^\top) v_\tau = \sum_{\tau \le t} \lambda^{t-\tau} (Q_t K_\tau^\top) V_\tau$$
+When current activation $x_t$ arrives, retrieval occurs by driving the signal forward through these accumulated prior synaptic weights:
 
-By the associativity of matrix multiplication, $x_t (x_\tau^\top v_\tau) = (x_t x_\tau^\top) v_\tau$. Propagating an activation through the dynamic synaptic matrix is strictly isomorphic to causal linear attention ($\lambda = 1$ recovering $Y_t$ exactly). In [`tests/verify_hebbian_equivalence.py`](tests/verify_hebbian_equivalence.py), we empirically verify that this difference is bounded by floating-point error:
+$$y_t = x_t \sigma_t = x_t \left( \sum_{\tau < t} \lambda^{t-1-\tau} x_\tau^\top v_\tau \right) = \sum_{\tau < t} \lambda^{t-1-\tau} (x_t x_\tau^\top) v_\tau = \sum_{\tau < t} \lambda^{t-1-\tau} (Q_t K_\tau^\top) V_\tau$$
+
+By the associativity of matrix multiplication, $x_t (x_\tau^\top v_\tau) = (x_t x_\tau^\top) v_\tau$. Propagating an activation through the dynamic synaptic matrix is strictly isomorphic to causal linear attention ($\lambda = 1$ recovering $Y_t$ exactly). In [`tests/verify_hebbian_equivalence.py`](tests/verify_hebbian_equivalence.py), we verify that this difference is bounded by machine floating-point precision:
 
 $$\max |Y_{\text{parallel}} - Y_{\text{Hebbian}}| < 10^{-15}$$
 
 ---
 
-### 2. Superposition Noise and Recall Collapse
+### 2. The Superposition Trade-off and Recall Collapse
 
-Accumulating $t$ associations into a fixed-size synaptic matrix comes with additive superposition noise. When querying with key $K_q$ at an earlier index $q < t$, the readout decomposes as:
+Under a fixed-size synaptic memory matrix $\rho_t \in \mathbb{R}^{n \times d}$, sequential associative storage incurs additive superposition interference.
 
-$$a^*_q = K_q \rho_t = \underbrace{\|K_q\|^2 V_q}_{\text{Target Signal}} + \underbrace{\sum_{j \neq q} (K_q K_j^\top) V_j}_{\text{Cross-Talk Superposition Noise}}$$
+For an associative recall probe of an item stored at timestep $q < t$, querying the accumulated matrix $\rho_t = \sum_{j < t} K_j^\top V_j$ with normalized key $K_q$ yields:
 
-Under Claim 8 (Appendix C.2 of the BDH paper), for a constant neuron count $n$ and key correlation $C$, the $L_2$ reconstruction error of the retrieved attention vector scales as:
+$$a^*_q = \frac{K_q \rho_t}{\|K_q\|^2} = \underbrace{V_q}_{\text{Target Vector}} + \underbrace{\sum_{\substack{j < t \\ j \neq q}} \frac{K_q K_j^\top}{\|K_q\|^2} V_j}_{\text{Superposition Interference}}$$
 
-$$\text{Error}(\|a^*_t - a_t\|_2) = O(\sqrt{\delta}), \quad \text{where } \delta > \frac{t \cdot (C + 1) \log n}{n}$$
+Under Claim 8 (Appendix C.2 of the BDH paper), for latent dimension $n$ and key correlation coefficient $C$, the $L_2$ reconstruction error relative to the target vector scales as:
 
-* **Independent Cues ($C = 0$)**: When keys are near-orthogonal, cross-talk noise grows slowly ($O(\sqrt{t})$), maintaining stable recall across moderate sequence lengths.
-* **Correlated Cues ($C > 0$)**: When keys share correlation, positive drift accumulates constructively across timesteps, accelerating recall collapse well before sequence length approaches latent dimension $n$.
+$$\|a^*_q - V_q\|_2 = O(\sqrt{\delta}), \quad \text{where } \delta > \frac{t \cdot (C + 1) \log n}{n}$$
+
+* **Independent Cues ($C = 0$)**: When keys are near-orthogonal, the interference variance scales as $O(t / n)$, maintaining bounded $L_2$ retrieval error across moderate sequence lengths.
+* **Correlated Cues ($C > 0$)**: When keys share positive pairwise correlation, the expectation $\mathbb{E}[K_q K_j^\top] > 0$ introduces systematic positive drift, accelerating retrieval error and causing recall collapse well before sequence length approaches latent dimension $n$.
 
 <p align="center">
   <img src="results/checkpoint_correlation_recall_collapse.png" alt="Checkpoint Recall Collapse Benchmark" width="90%" />
@@ -101,7 +115,9 @@ $$\text{Error}(\|a^*_t - a_t\|_2) = O(\sqrt{\delta}), \quad \text{where } \delta
 
 ---
 
-## Setup & Reproduction Guide
+## Localhost Reproduction Guide
+
+You can reproduce both the interactive educational web application and the underlying machine learning experiments locally.
 
 ### Prerequisites
 * Python 3.9+ (Python 3.10+ recommended)
@@ -114,9 +130,9 @@ cd dataforge_model
 
 ---
 
-### Running the Web Explainer Locally
+### Track A: Run the Educational Web Tool Locally
 
-The interactive web explainer includes narrative visualizers and an embedded inspector that queries the trained checkpoints.
+The local development server launches the complete educational platform with live checkpoint evaluation:
 
 ```bash
 cd web
@@ -124,15 +140,15 @@ npm install
 npm run dev
 ```
 
-* The React explainer runs at `http://localhost:5173`.
+* The React educational explainer runs at `http://localhost:5173`.
 * Vite starts the local Python inference server (`web/livemodel/server.py`) in the background on port `8765`.
-* Web requests to `/api/*` are proxied to the Python backend automatically.
+* API calls (`/api/trace`, `/api/generate`) are automatically proxied to the live model backend.
 
 ---
 
-### Machine Learning Benchmarks & Verification
+### Track B: Run & Verify Machine Learning Benchmarks
 
-Install the Python dependencies:
+Install Python dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -186,9 +202,9 @@ Trained checkpoints are stored in the repository for immediate evaluation:
 ## Repository Structure
 
 ```text
-├── README.md                              # Project documentation
+├── README.md                              # Comprehensive project documentation
 ├── requirements.txt                       # Core Python dependencies
-├── images/                                # Project visual assets
+├── images/                                # Visual assets
 │   └── synapse.jpg                        # Hero banner
 ├── train_bdh_tinyshakespeare.py           # BDH training pipeline
 ├── inference.py                           # CLI interactive text generation
@@ -196,7 +212,7 @@ Trained checkpoints are stored in the repository for immediate evaluation:
 ├── bdh_d64.pt                             # Checkpoint for BDH d=64
 ├── bdh_d128.pt                            # Checkpoint for BDH d=128
 │
-├── results/                               # Benchmark reports, CSVs, and figures
+├── results/                               # Empirical reports, CSVs, and figures
 │   ├── checkpoint_correlation_recall_collapse.png
 │   ├── key_correlation_recall_collapse.png
 │   ├── checkpoint_recall_collapse_data.csv
@@ -209,8 +225,10 @@ Trained checkpoints are stored in the repository for immediate evaluation:
 │   ├── plot_correlation_collapse.py
 │   └── sample_checkpoints.py
 │
-├── web/                                   # Interactive web explainer (React + Vite)
+├── web/                                   # Educational Interactive Web Platform
 │   ├── src/                               # Frontend source (Tailwind, Visx, KaTeX)
+│   │   ├── pages/                         # Beats 1-3 narrative & Beat 4 Live Model
+│   │   └── components/                    # Synaptic tables, QueryFlow, interactive charts
 │   ├── livemodel/                         # Zero-dependency Python inference microservice
 │   │   ├── server.py                      # ThreadingHTTPServer API
 │   │   ├── bdh.py                         # Standalone BDH loader
